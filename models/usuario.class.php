@@ -33,8 +33,15 @@ class Usuario extends conexion
         $datos = parent::obtenerDatos($query);
         return $datos;
     }
+    /*
+    public function pruebaSp($pagina = 1)
+    {
+        $query = "CALL PRC_PRUEBA(@p0, @p1);";
+        $datos = parent::callProcedure($query);
+        return $datos;
+    }
 
-
+*/
 
     public function obtenerUsuario($id)
     {
@@ -153,7 +160,7 @@ class Usuario extends conexion
 
     /* DELETE */
 
-    
+
     public function delete($json)
     {
         $_respuestas = new respuestas;
@@ -195,5 +202,4 @@ class Usuario extends conexion
             return 0;
         }
     }
-
 }

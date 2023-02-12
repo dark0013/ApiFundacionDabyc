@@ -1,5 +1,6 @@
 <?php
-class conexion {
+class conexion
+{
 
     private $server;
     private $user;
@@ -9,7 +10,8 @@ class conexion {
     private $conexion;
 
 
-    function __construct(){
+    function __construct()
+    {
         $listadatos = $this->datosConexion();
         foreach ($listadatos as $key => $value) {
             $this->server = $value['server'];
@@ -18,24 +20,25 @@ class conexion {
             $this->database = $value['database'];
             $this->port = $value['port'];
         }
-        $this->conexion = new mysqli($this->server,$this->user,$this->password,$this->database,$this->port);
-        if($this->conexion->connect_errno){
+        $this->conexion = new mysqli($this->server, $this->user, $this->password, $this->database, $this->port);
+        if ($this->conexion->connect_errno) {
             echo "algo va mal con la conexion";
             die();
         }
-
     }
 
-    private function datosConexion(){
+    private function datosConexion()
+    {
         $direccion = dirname(__FILE__);
         $jsondata = file_get_contents($direccion . "/" . "config");
         return json_decode($jsondata, true);
     }
 
 
-    private function convertirUTF8($array){
-        array_walk_recursive($array, function(&$item,$key){
-            if(!mb_detect_encoding($item,'utf-8',true)){
+    private function convertirUTF8($array)
+    {
+        array_walk_recursive($array, function (&$item, $key) {
+            if (!mb_detect_encoding($item, 'utf-8', true)) {
                 $item = utf8_encode($item);
             }
         });
@@ -43,36 +46,64 @@ class conexion {
     }
 
 
-    public function obtenerDatos($sqlstr){
+    public function callProcedure($sqlstr)
+    {
+
+        $resultArray = array();
+        $stmt = mysqli_prepare($this->conexion, $sqlstr);
+        mysqli_stmt_execute($stmt);
+        $select = mysqli_query($this->conexion, "SELECT @p0 AS COD_RESPONSE, @p1 AS MENSAGE_RESPONSE;");
+
+        if (!$select) {
+            return "Error en la consulta: " . mysqli_error($this->conexion);
+            return;
+        }
+
+        if (mysqli_num_rows($select) > 0) {
+            $row = mysqli_fetch_assoc($select);
+            foreach ($select as $key) {
+                $resultArray[] = $key;
+            }
+            return $this->convertirUTF8($resultArray);
+        } else {
+            return "No se encontraron resultados";
+        }
+    }
+
+
+    public function obtenerDatos($sqlstr)
+    {
         $results = $this->conexion->query($sqlstr);
         $resultArray = array();
-        foreach($results as $key){
+        foreach ($results as $key) {
             $resultArray[] = $key;
         }
 
         return $this->convertirUTF8($resultArray);
     }
 
-    public function noQuery($sqlstr){
+    public function noQuery($sqlstr)
+    {
         $results = $this->conexion->query($sqlstr);
         return $this->conexion->affected_rows;
     }
 
     //solo para insert
-    public function noQueryId($sqlstr){
+    public function noQueryId($sqlstr)
+    {
         $results = $this->conexion->query($sqlstr);
         $filas = $this->conexion->affected_rows;
         if ($filas >= 1) {
             return $this->conexion->insert_id;
-        }else{
+        } else {
             return 0;
         }
     }
 
     //encriptar
-    protected function encriptar($string){
+    protected function encriptar($string)
+    {
         return md5($string);
     }
-
 }
 $_conexion = new conexion();
