@@ -54,20 +54,20 @@ class conexion
         mysqli_stmt_execute($stmt);
         $select = mysqli_query($this->conexion, "SELECT @p0 AS COD_RESPONSE, @p1 AS MENSAGE_RESPONSE;");
 
-        if (!$select) {
+        /*  if (!$select) {
             return "Error en la consulta: " . mysqli_error($this->conexion);
             return;
         }
 
         if (mysqli_num_rows($select) > 0) {
-            $row = mysqli_fetch_assoc($select);
-            foreach ($select as $key) {
-                $resultArray[] = $key;
-            }
-            return $this->convertirUTF8($resultArray);
-        } else {
-            return "No se encontraron resultados";
+            $row = mysqli_fetch_assoc($select); */
+        foreach ($select as $key) {
+            $resultArray[] = $key;
         }
+        return $this->convertirUTF8($resultArray);
+        /* } else {
+            return "No se encontraron resultados";
+        } */
     }
 
 

@@ -18,6 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo json_encode($listarUsuario);
         http_response_code(200);
     } 
+    if (isset($_GET["countUsers"])) {
+        $pagina = $_GET["countUsers"];
+        $listarUsuario = $_Usuario->CountUsuario($pagina);
+        header("Content-Type: application/json");
+        echo json_encode($listarUsuario);
+        http_response_code(200);
+    } 
     
     else if (isset($_GET["id"])) {
         $UsuarioID = $_GET["id"];

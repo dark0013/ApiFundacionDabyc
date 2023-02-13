@@ -34,7 +34,7 @@ class Usuario extends conexion
         return $datos;
     }
     /*
-    public function pruebaSp($pagina = 1)
+    public function listarUsuario($pagina = 1)
     {
         $query = "CALL PRC_PRUEBA(@p0, @p1);";
         $datos = parent::callProcedure($query);
@@ -46,6 +46,11 @@ class Usuario extends conexion
     public function obtenerUsuario($id)
     {
         $query = "select * from $this->tabla where colorID  = $id";
+        return $datos = parent::obtenerDatos($query);
+    }
+    public function CountUsuario($id)
+    {
+        $query = "SELECT COUNT(*) as totalUser FROM $this->tabla where status = 'S'";
         return $datos = parent::obtenerDatos($query);
     }
 
