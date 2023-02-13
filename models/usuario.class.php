@@ -48,6 +48,7 @@ class Usuario extends conexion
         $query = "select * from $this->tabla where colorID  = $id";
         return $datos = parent::obtenerDatos($query);
     }
+    
     public function CountUsuario($id)
     {
         $query = "SELECT COUNT(*) as totalUser FROM $this->tabla where status = 'S'";
