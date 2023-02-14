@@ -1,4 +1,6 @@
 <?php
+require_once "../config/Logs.php";
+
 class conexion
 {
 
@@ -12,17 +14,30 @@ class conexion
 
     function __construct()
     {
-        $listadatos = $this->datosConexion();
-        foreach ($listadatos as $key => $value) {
-            $this->server = $value['server'];
-            $this->user = $value['user'];
-            $this->password = $value['password'];
-            $this->database = $value['database'];
-            $this->port = $value['port'];
-        }
-        $this->conexion = new mysqli($this->server, $this->user, $this->password, $this->database, $this->port);
-        if ($this->conexion->connect_errno) {
-            echo "algo va mal con la conexion";
+        $errorLogs = new ErrorLogs();
+        try {
+            $listadatos = $this->datosConexion();
+            foreach ($listadatos as $key => $value) {
+                $this->server = $value['server'];
+                $this->user = $value['user'];
+                $this->password = $value['password'];
+                $this->database = $value['database'];
+                $this->port = $value['port'];
+            }
+            if (!isset($value['server']) || !isset($value['user']) || !isset($value['password']) || !isset($value['database']) || !isset($value['port'])) {
+                throw new Exception("Falta información en los datos de conexión");
+            } else {
+                $this->conexion = new mysqli($this->server, $this->user, $this->password, $this->database, $this->port);
+                if ($this->conexion->connect_errno) {
+                    throw new Exception("Error en la conexión a la base de datos: " . $this->conexion->connect_errno);
+                }
+            }
+        } catch (Exception $e) {
+            $_errores = "algo va mal con la conexion";
+            $array = array("error_id" => "500", "error_msg" => $_errores);
+
+            echo json_encode($array);
+            $errorLogs->logException($e);
             die();
         }
     }

@@ -2,6 +2,8 @@
 
 require_once "../config/conexion/conexion.php";
 require_once "../config/respuesta.class.php";
+require_once "../config/Logs.php";
+
 
 class Usuario extends conexion
 {
@@ -34,7 +36,7 @@ class Usuario extends conexion
         return $datos;
     }
     /*
-    public function listarUsuario($pagina = 1)
+    public function callProcedure($pagina = 1)
     {
         $query = "CALL PRC_PRUEBA(@p0, @p1);";
         $datos = parent::callProcedure($query);
@@ -45,10 +47,10 @@ class Usuario extends conexion
 
     public function obtenerUsuario($id)
     {
-        $query = "select * from $this->tabla where colorID  = $id";
+        $query = "select * from $this->tabla where id_user  = $id";
         return $datos = parent::obtenerDatos($query);
     }
-    
+
     public function CountUsuario($id)
     {
         $query = "SELECT COUNT(*) as totalUser FROM $this->tabla where status = 'S'";
@@ -101,7 +103,7 @@ class Usuario extends conexion
         $resp = parent::noQueryId($query);
 
         if ($resp) {
-            return $resp .  $query;
+            return $resp ;
         } else {
             return 0;
         }
