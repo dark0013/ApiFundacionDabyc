@@ -9,6 +9,7 @@ class Usuario extends conexion
 {
     private $tabla = "tbl_usuario";
     private $id_user  = "";
+    private $name_users  = "";
     private $id_rol = "";
     private $identification_card  = "";
     private $name  = "";
@@ -70,6 +71,7 @@ class Usuario extends conexion
         if (!isset($datos["name"]) || !isset($datos["id_rol"])) {
             return $_respuestas->error_400();
         } else {
+            $this->name_users = $datos['name_users'];
             $this->id_rol = $datos['id_rol'];
             $this->identification_card = $datos['identification_card'];
             $this->name = $datos['name'];
@@ -86,6 +88,7 @@ class Usuario extends conexion
                     "UsuarioId" => $resp
                 );
 
+
                 return $respuesta;
             } else {
                 return $_respuestas->error_500();
@@ -97,8 +100,8 @@ class Usuario extends conexion
 
     private function insertarUsuario()
     {
-        $query = "INSERT INTO `tbl_usuario`(id_rol, identification_card, name, pass, user_sesion, usur_creation) 
-        VALUES ('$this->id_rol', '$this->identification_card','$this->name', '$this->pass', '$this->user_sesion', '$this->usur_creation')";
+        $query = "INSERT INTO `tbl_usuario`(name_users,id_rol, identification_card, name, pass, user_sesion, usur_creation) 
+        VALUES ('$this->name_users','$this->id_rol', '$this->identification_card','$this->name', '$this->pass', '$this->user_sesion', '$this->usur_creation')";
         //print_r($query);
         $resp = parent::noQueryId($query);
 
@@ -123,7 +126,9 @@ class Usuario extends conexion
         if (!isset($datos["name"]) || !isset($datos["id_rol"])) {
             return $_respuestas->error_400();
         } else {
+            
             $this->id_user = $datos['id_user'];
+            $this->name_users = $datos['name_users'];
             $this->id_rol = $datos['id_rol'];
             $this->identification_card = $datos['identification_card'];
             $this->name = $datos['name'];
@@ -152,7 +157,7 @@ class Usuario extends conexion
 
     private function modificarUsuario()
     {
-        $query = "UPDATE `tbl_usuario` SET id_rol='$this->id_rol', identification_card='$this->identification_card', name='$this->name', pass='$this->pass',
+        $query = "UPDATE `tbl_usuario` SET 'name_users' ='$this->name_users', id_rol='$this->id_rol', identification_card='$this->identification_card', name='$this->name', pass='$this->pass',
         status ='$this->status', user_sesion='$this->user_sesion', user_update='$this->user_update' WHERE     id_user = '$this->id_user'";
 
         // print_r($query);
