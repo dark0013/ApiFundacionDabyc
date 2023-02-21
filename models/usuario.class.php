@@ -69,6 +69,7 @@ class Usuario extends conexion
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
         if (!isset($datos["name"]) || !isset($datos["id_rol"])) {
+           
             return $_respuestas->error_400();
         } else {
             $this->name_users = $datos['name_users'];
@@ -102,7 +103,7 @@ class Usuario extends conexion
     {
         $query = "INSERT INTO `tbl_usuario`(name_users,id_rol, identification_card, name, pass, user_sesion, usur_creation) 
         VALUES ('$this->name_users','$this->id_rol', '$this->identification_card','$this->name', '$this->pass', '$this->user_sesion', '$this->usur_creation')";
-        //print_r($query);
+       
         $resp = parent::noQueryId($query);
 
         if ($resp) {
