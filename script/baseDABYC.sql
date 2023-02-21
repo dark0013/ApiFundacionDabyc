@@ -91,6 +91,7 @@ CREATE TABLE `tbl_roles` (
 
 CREATE TABLE `tbl_usuario` (
   `id_user` int NOT NULL,
+  `name_users` varchar(200) NOT NULL,
   `id_rol` varchar(100) NOT NULL,
   `identification_card` varchar(100) NOT NULL,
   `name` varchar(250) NOT NULL,
