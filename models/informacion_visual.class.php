@@ -78,7 +78,7 @@ class Informacion_visual extends conexion
         }
     }
 
-    /* PuT */
+    /* PuT 
 
     public function put($json)
     {
@@ -121,7 +121,7 @@ class Informacion_visual extends conexion
     }
 
 
-    /* DELETE */
+    /* DELETE 
 
 
     public function delete($json)
@@ -164,5 +164,5 @@ class Informacion_visual extends conexion
         } else {
             return 0;
         }
-    }
+    }*/
 }
