@@ -17,8 +17,10 @@
     <h2>POST</h2>
     <p>http://localhost/ApiFundacionDabyc/controllers/usuario</p>
     <p>{
+        "id_user":"3",
         "id_rol": "55",
         "identification_card": "000",
+        "name_users":"other",
         "name": "yyyy",
         "pass": "0000",
         "status": "e",
@@ -28,21 +30,24 @@
 
     <h2>PUT</h2>
     <p>http://localhost/ApiFundacionDabyc/controllers/usuario</p>
-    <p>{"id_user": "11",
+    <p>{
+        "id_user": "2",
         "id_rol": "55",
+        "name_users":"prueba",
         "identification_card": "000",
         "name": "yyyy",
         "pass": "0000",
         "status": "e",
         "user_sesion": "ss",
-        "usur_creation": "xx"
+        "usur_creation": "xx",
+        "user_update": "2023-02-21 19:13:16"
         }</p>
     <h2>DELETE</h2>
     <p>http://localhost/ApiFundacionDabyc/controllers/usuario</p>
     <p>{
         "id_user": "11"
         }</p>
-
+    <br><br><br>
     <h1>ROL</h1>
     <h2>GET</h2>
     <p>http://localhost/ApiFundacionDabyc/controllers/rol?page</p>
@@ -63,20 +68,60 @@
     <h2>PUT</h2>
     <p>http://localhost/ApiFundacionDabyc/controllers/rol</p>
     <p>{
-        "id_rol": "55",
-        "rol_user": "000",
+        "id_rol": "2",
+        "rol_user": "prueba",
         "cod_rol": "1",
         "user_name": "1",
-        "status": "yyyy",
-        "user_sesion": "0000",
-        "date_creation": "e",
+        "status": "a",
+        "user_sesion": "200",
+        "date_creation": "20-20-20",
         "usur_creation": "ss",
-        "user_update": "xx"
+        "user_update":"22"
         }</p>
     <h2>DELETE</h2>
     <p>http://localhost/ApiFundacionDabyc/controllers/rol</p>
     <p>{
         "id_rol": "55"
+        }</p>
+    <br><br><br>
+    <h1>PROYECTOS</h1>
+    <h2>GET</h2>
+    <p>http://localhost/ApiFundacionDabyc/controllers/proyectos?page</p>
+
+    <h2>POST</h2>
+    <p>http://localhost/ApiFundacionDabyc/controllers/proyectos</p>
+    <p>{
+        "id_project": "55",
+        "title": "000",
+        "url_image": "1",
+        "image": "1",
+        "description": "yyyy",
+        "rol_user": "0000",
+        "estado": "e",
+        "user_sesion": "ss",
+        "date_creation":"fgff",
+        "usur_creation":"sdd"
+        }</p>
+
+    <h2>PUT</h2>
+    <p>http://localhost/ApiFundacionDabyc/controllers/proyectos</p>
+    <p>{
+        "id_project": "1",
+        "title": "000",
+        "url_image": "1",
+        "image": "1",
+        "description": "yyyy",
+        "rol_user": "0000",
+        "estado": "e",
+        "user_sesion": "ss",
+        "date_creation":"fgff",
+        "usur_creation":"sdd",
+        "user_update":"sdd",
+        }</p>
+    <h2>DELETE</h2>
+    <p>http://localhost/ApiFundacionDabyc/controllers/proyectos</p>
+    <p>{
+        "id_project":"1"
         }</p>
 
 
