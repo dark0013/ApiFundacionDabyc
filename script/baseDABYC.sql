@@ -1,7 +1,7 @@
 CREATE DATABASE `bdabyc`;
 
 CREATE TABLE `tbl_contactos` (
-  `id_contacto` int NOT NULL,
+  `id_contacto` int NOT NULL AUTO_INCREMENT,
   `indentication_card` varchar(50) NOT NULL,
   `full_name` varchar(250) NOT NULL,
   `phone` varchar(50) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `tbl_contactos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 CREATE TABLE `tbl_detalle_donacion` (
-  `id_detalle` int NOT NULL,
+  `id_detalle` int NOT NULL AUTO_INCREMENT,
   `id_donacion` int NOT NULL,
   `id_producto` int NOT NULL,
   `id_user` int NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE `tbl_detalle_donacion` (
 
 
 CREATE TABLE `tbl_donaciones` (
-  `id_donacion` int NOT NULL,
+  `id_donacion` int NOT NULL AUTO_INCREMENT,
   `type_products` varchar(250) NOT NULL,
   `quantity` varchar(50) NOT NULL,
   `description` varchar(250) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `tbl_donaciones` (
 
 
 CREATE TABLE `tbl_informacion_visual` (
-  `id_information` int NOT NULL,
+  `id_information` int NOT NULL AUTO_INCREMENT,
   `local_storage` varchar(250) NOT NULL,
   `rol_user` varchar(100) NOT NULL,
   `status` char(5) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE `tbl_informacion_visual` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 CREATE TABLE `tbl_productos` (
-  `id_product` int NOT NULL,
+  `id_product` int NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   `quantity` varchar(300) NOT NULL,
   `tipe_products` varchar(250) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `tbl_productos` (
 
 
 CREATE TABLE `tbl_proyectos` (
-  `id_project` int NOT NULL,
+  `id_project` int NOT NULL AUTO_INCREMENT,
   `title` varchar(250) NOT NULL,
   `url_image` varchar(250) NOT NULL,
   `image` varchar(50) NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `tbl_proyectos` (
 
 
 CREATE TABLE `tbl_roles` (
-  `id_rol` int NOT NULL,
+  `id_rol` int NOT NULL AUTO_INCREMENT,
   `rol_user` varchar(100) NOT NULL,
   `status` char(5) NOT NULL,
   `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -90,7 +90,7 @@ CREATE TABLE `tbl_roles` (
 
 
 CREATE TABLE `tbl_usuario` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int NOT NULL AUTO_INCREMENT,
   `name_users` varchar(200) NOT NULL,
   `id_rol` varchar(100) NOT NULL,
   `identification_card` varchar(100) NOT NULL,
