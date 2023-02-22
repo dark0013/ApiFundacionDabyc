@@ -136,6 +136,7 @@ class Usuario extends conexion
             $this->pass = $datos['pass'];
             $this->user_sesion = $datos['user_sesion'];
             $this->usur_creation = $datos['usur_creation'];
+            $this->user_update = $datos['user_update'];
 
 
             $resp = $this->modificarUsuario();
@@ -158,10 +159,10 @@ class Usuario extends conexion
 
     private function modificarUsuario()
     {
-        $query = "UPDATE `tbl_usuario` SET 'name_users' ='$this->name_users', id_rol='$this->id_rol', identification_card='$this->identification_card', name='$this->name', pass='$this->pass',
-        status ='$this->status', user_sesion='$this->user_sesion', user_update='$this->user_update' WHERE     id_user = '$this->id_user'";
+        $query = "UPDATE `tbl_usuario` SET `name_users` ='$this->name_users', `id_rol`='$this->id_rol', `identification_card`='$this->identification_card', `name`='$this->name', `pass`='$this->pass',
+       `user_sesion`='$this->user_sesion', `user_update`='$this->user_update' WHERE `id_user` = '$this->id_user'";
 
-        // print_r($query);
+        //print_r($query);
         $resp = parent::noQuery($query);
 
         if ($resp) {

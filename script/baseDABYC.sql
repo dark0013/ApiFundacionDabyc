@@ -80,6 +80,8 @@ CREATE TABLE `tbl_proyectos` (
 CREATE TABLE `tbl_roles` (
   `id_rol` int NOT NULL AUTO_INCREMENT,
   `rol_user` varchar(100) NOT NULL,
+  `cod_rol` varchar(5) NOT NULL,
+  `user_name` varchar(200) NOT NULL,
   `status` char(5) NOT NULL,
   `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
