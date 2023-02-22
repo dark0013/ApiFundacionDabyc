@@ -90,16 +90,16 @@ CREATE TABLE `tbl_roles` (
 
 
 CREATE TABLE `tbl_usuario` (
-  `id_user` int NOT NULL,
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `name_users` varchar(200) NOT NULL,
   `id_rol` varchar(100) NOT NULL,
   `identification_card` varchar(100) NOT NULL,
   `name` varchar(250) NOT NULL,
   `pass` varchar(250) NOT NULL,
   `status` char(5) NOT NULL,
-  `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
-  `usur_creation` datetime DEFAULT CURRENT_TIMESTAMP,
-  `user_update` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  `user_sesion` datetime DEFAULT current_timestamp(),
+  `date_creation` datetime DEFAULT current_timestamp(),
+  `usur_creation` datetime DEFAULT current_timestamp(),
+  `user_update` datetime DEFAULT current_timestamp(),
+    PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
