@@ -36,7 +36,7 @@ class Rol extends conexion
 
     public function obtenerRol($id)
     {
-        $query = "select * from $this->tabla where id_user  = $id";
+        $query = "select * from $this->tabla where id_rol  = $id";
         return $datos = parent::obtenerDatos($query);
     }
 
@@ -78,7 +78,7 @@ class Rol extends conexion
     private function insertarRol()
     {
         $query = "INSERT INTO $this-> `tbl_roles`(rol_user, cod_rol, user_name,  user_sesion, date_creation, usur_creation)
-        VALUES ('$this->id_rol', '$this->rol_user', '$this->cod_rol','$this->user_name','$this->user_sesion', '$this->date_creation', '$this->usur_creation')";
+        VALUES ('$this->rol_user', '$this->cod_rol','$this->user_name','$this->user_sesion', '$this->date_creation', '$this->usur_creation')";
         $resp = parent::noQueryId($query);
 
         if ($resp) {
@@ -128,7 +128,7 @@ class Rol extends conexion
     private function actualizarRol()
     {
         $query = "UPDATE `tbl_roles` SET `rol_user` = '$this->rol_user',`cod_rol` = '$this->cod_rol',`user_name` = '$this->user_name' ,`status`='$this->status',
-        `user_sesion`='$this->user_sesion', `user_update`='$this->user_update' WHERE   `id_rol` = '$this->id_rol'";
+        `user_sesion`='$this->user_sesion', `user_update`='$this->user_update' WHERE  `id_rol` = '$this->id_rol'";
        //$query = "INSERT INTO $this->tabla(id_rol, rol_user,  user_sesion, date_creation, usur_creation) VALUES ('$this->id_rol', '$this->rol_user', '$this->user_sesion', '$this->date_creation', '$this->usur_creation')";
         $resp = parent::noQuery($query);
         if ($resp) {
