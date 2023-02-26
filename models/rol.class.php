@@ -77,7 +77,7 @@ class Rol extends conexion
 
     private function insertarRol()
     {
-        $query = "INSERT INTO $this->tabla(id_rol, rol_user, cod_rol, user_name,  user_sesion, date_creation, usur_creation)
+        $query = "INSERT INTO $this-> `tbl_roles`(id_rol, rol_user, cod_rol, user_name,  user_sesion, date_creation, usur_creation)
         VALUES ('$this->id_rol', '$this->rol_user', '$this->cod_rol','$this->user_name','$this->user_sesion', '$this->date_creation', '$this->usur_creation')";
         $resp = parent::noQueryId($query);
 
