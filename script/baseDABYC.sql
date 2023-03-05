@@ -2,7 +2,7 @@ CREATE DATABASE `bdabyc`;
 
 CREATE TABLE `tbl_contactos` (
   `id_contacto` int NOT NULL AUTO_INCREMENT,
-  `indentication_card` varchar(50) NOT NULL,
+  `indentication` varchar(50) NOT NULL,
   `full_name` varchar(250) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `email` char(100) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE `tbl_contactos` (
   `status` char(5) NOT NULL,
   `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
-  `usur_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_creation` datetime DEFAULT CURRENT_TIMESTAMP,
   `user_update` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_contacto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
@@ -55,7 +55,7 @@ CREATE TABLE `tbl_productos` (
   `description` varchar(250) NOT NULL,
   `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
-  `usur_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_creation` datetime DEFAULT CURRENT_TIMESTAMP,
   `user_update` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_product`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
@@ -66,12 +66,12 @@ CREATE TABLE `tbl_proyectos` (
   `title` varchar(250) NOT NULL,
   `url_image` varchar(250) NOT NULL,
   `image` varchar(50) NOT NULL,
-  `description` char(5) NOT NULL,
+  `description` varchar(300) NOT NULL,
   `rol_user` varchar(100) NOT NULL,
   `estado` char(5) NOT NULL,
   `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
-  `usur_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_creation` datetime DEFAULT CURRENT_TIMESTAMP,
   `user_update` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_project`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
@@ -85,7 +85,7 @@ CREATE TABLE `tbl_roles` (
   `status` char(5) NOT NULL,
   `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
-  `usur_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_creation` datetime DEFAULT CURRENT_TIMESTAMP,
   `user_update` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_rol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
@@ -101,7 +101,7 @@ CREATE TABLE `tbl_usuario` (
   `status` char(5) NOT NULL,
   `user_sesion` datetime DEFAULT current_timestamp(),
   `date_creation` datetime DEFAULT current_timestamp(),
-  `usur_creation` datetime DEFAULT current_timestamp(),
+  `user_creation` datetime DEFAULT current_timestamp(),
   `user_update` datetime DEFAULT current_timestamp(),
     PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
