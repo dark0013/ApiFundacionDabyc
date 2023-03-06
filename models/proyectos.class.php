@@ -49,11 +49,23 @@ class Proyectos extends conexion
     {
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
+
+
+        /*    if (isset($datos['imagen'])) {
+           // $resp =    $this->procesarImagen($datos['imagen']);
+            $this->image =   $this->procesarImagen($datos['imagen']);
+              echo  ($this->image); 
+        } */
+
         if (!isset($datos["title"]) || !isset($datos["user_sesion"])) {
             return $_respuestas->error_400();
         } else {
             $this->title = $datos['title'];
-            $this->url_image = $datos['url_image'];
+
+
+            $this->url_image =  $this->procesarImagen($datos['url_image']);
+
+
             $this->image = $datos['image'];
             $this->description = $datos['description'];
             $this->rol_user = $datos['rol_user'];
@@ -184,5 +196,31 @@ class Proyectos extends conexion
         } else {
             return 0;
         }
+    }
+
+
+
+    private function procesarImagen($imagen)
+    {
+        // Obtener la ruta base de la aplicación en el servidor
+        $ruta_base = $_SERVER['DOCUMENT_ROOT'] . '/ApiFundacionDabyc/public/imagenes/';
+    
+        // Obtener la extensión de la imagen a partir del tipo MIME
+        $partes = explode(";base64,", $imagen);
+        $mime_type = $partes[0];
+        $extension = explode("/", $mime_type)[1];
+    
+        // Decodificar la imagen base64 a su formato binario original
+        $imagen_binaria = base64_decode($partes[1]);
+    
+        // Generar un nombre único para el archivo de imagen
+        $nombre_archivo = uniqid() . "." . $extension;
+    
+        // Guardar la imagen en el servidor
+        $ruta_archivo = $ruta_base . $nombre_archivo;
+        file_put_contents($ruta_archivo, $imagen_binaria);
+    
+        // Devolver la URL completa de la imagen guardada
+        return 'http://' . $_SERVER['HTTP_HOST'] . '/ApiFundacionDabyc/public/imagenes/' . $nombre_archivo;
     }
 }
