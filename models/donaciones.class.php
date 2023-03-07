@@ -29,12 +29,12 @@ class Donaciones extends conexion
         return $datos;
     }
 
-    /*public function callProcedure($pagina = 1)
+    public function callProcedure($pagina = 1)
     {
-        $query = "CALL PRC_PRUEBA(@p0, @p1);";
+        $query = "CALL PRC_DONACIONES(@p0, @p1);";
         $datos = parent::callProcedure($query);
         return $datos;
-    }*/
+    }
 
 
     public function obtenerIDonaciones($id)
