@@ -13,10 +13,10 @@ class Proyectos extends conexion
     private $image = "";
     private $description = "";
     private $rol_user = "";
-    private $estado = "";
+    private $status = "";
     private $user_sesion = "";
     private $date_creation = "";
-    private $usur_creation = "";
+    private $user_creation = "";
     private $user_update = "";
 
     public function listarProyectos($pagina = 1)
@@ -38,7 +38,7 @@ class Proyectos extends conexion
 
     public function obtenerProyectos($id)
     {
-        $query = "select * from $this->tabla where id_user  = $id";
+        $query = "select * from $this->tabla where id_project  = $id";
         return $datos = parent::obtenerDatos($query);
     }
 
@@ -69,10 +69,10 @@ class Proyectos extends conexion
             $this->image = $datos['image'];
             $this->description = $datos['description'];
             $this->rol_user = $datos['rol_user'];
-            $this->estado = $datos['estado'];
+            $this->status = $datos['status'];
             $this->user_sesion = $datos['user_sesion'];
             $this->date_creation = $datos['date_creation'];
-            $this->usur_creation = $datos['usur_creation'];
+            $this->user_creation = $datos['user_creation'];
 
             $resp = $this->insertarProyectos();
 
@@ -92,8 +92,8 @@ class Proyectos extends conexion
 
     private function insertarProyectos()
     {
-        $query = "INSERT INTO $this->tabla(id_project, title, url_image, image,  description, rol_user, estado,user_sesion,date_creation,usur_creation)
-        VALUES ('$this->id_project', '$this->title', '$this->url_image','$this->image','$this->description', '$this->rol_user', '$this->estado', '$this->user_sesion', '$this->date_creation', '$this->usur_creation')";
+        $query = "INSERT INTO `tbl_proyectos`(title, url_image, image,  description, rol_user, status,user_sesion,date_creation,user_creation)
+        VALUES ('$this->title', '$this->url_image','$this->image','$this->description', '$this->rol_user', '$this->status', '$this->user_sesion', '$this->date_creation', '$this->user_creation')";
         $resp = parent::noQueryId($query);
 
         if ($resp) {
@@ -110,7 +110,7 @@ class Proyectos extends conexion
     {
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
-        if (!isset($datos["rol_user"]) || !isset($datos["user_sesion"])) {
+        if (!isset($datos["id_project"]) || !isset($datos["user_sesion"])) {
             return $_respuestas->error_400();
         } else {
             $this->id_project = $datos['id_project'];
@@ -119,11 +119,11 @@ class Proyectos extends conexion
             $this->image = $datos['image'];
             $this->description = $datos['description'];
             $this->rol_user = $datos['rol_user'];
-            $this->estado = $datos['estado'];
+            $this->status = $datos['status'];
             $this->user_sesion = $datos['user_sesion'];
             $this->date_creation = $datos['date_creation'];
-            $this->usur_creation = $datos['usur_creation'];
-
+            $this->user_creation = $datos['user_creation'];
+            $this->user_update = $datos['user_update'];
 
             $resp = $this->actualizarProyectos();
 
@@ -144,7 +144,7 @@ class Proyectos extends conexion
     private function actualizarProyectos()
     {
         $query = "UPDATE `tbl_proyectos` SET `title` = '$this->title',`url_image` = '$this->url_image',`image` = '$this->image' ,`description`='$this->description', `rol_user`='$this->rol_user', 
-         `estado`='$this->estado', `user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation', `usur_creation`='$this->usur_creation', `user_update`='$this->user_update' WHERE `id_project` = '$this->id_project'";
+         `status`='$this->status', `user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation', `user_creation`='$this->user_creation', `user_update`='$this->user_update' WHERE `id_project` = '$this->id_project'";
         $resp = parent::noQuery($query);
         if ($resp) {
             return $resp;
@@ -187,7 +187,7 @@ class Proyectos extends conexion
 
     private function eliminarProyectos()
     {
-        $query = "DELETE FROM $this->tabla WHERE id_project='$this->id_project'";
+        $query = "DELETE FROM $this->tabla WHERE `id_project`='$this->id_project'";
 
         $resp = parent::noQuery($query);
 
