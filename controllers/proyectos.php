@@ -19,6 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         http_response_code(200);
     } 
 
+    if (isset($_GET["countProyect"])) {
+        $pagina = $_GET["countProyect"];
+        $listarProyectos = $_Proyectos->CountProyectos($pagina);
+        header("Content-Type: application/json");
+        echo json_encode($listarProyectos);
+        http_response_code(200);
+    } 
+
     else if (isset($_GET["id"])) {
         $ProyectosID = $_GET["id"];
         $datosProyectos = $_Proyectos->obtenerProyectos($_ProyectosID);

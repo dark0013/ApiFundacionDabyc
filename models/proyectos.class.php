@@ -42,6 +42,13 @@ class Proyectos extends conexion
         return $datos = parent::obtenerDatos($query);
     }
 
+    public function CountProyectos($id)
+    {
+        $query = "SELECT COUNT(*) as totalproyectos FROM $this->tabla where status = 'S'";
+        return $datos = parent::obtenerDatos($query);
+    }
+
+
     /* POST */
 
 
@@ -92,8 +99,8 @@ class Proyectos extends conexion
 
     private function insertarProyectos()
     {
-        $query = "INSERT INTO `tbl_proyectos`(title, url_image, image,  description, rol_user, status,user_sesion,date_creation,user_creation)
-        VALUES ('$this->title', '$this->url_image','$this->image','$this->description', '$this->rol_user', '$this->status', '$this->user_sesion', '$this->date_creation', '$this->user_creation')";
+        $query = "INSERT INTO `tbl_proyectos`(title, url_image, image,  description, rol_user,user_sesion,date_creation,user_creation)
+        VALUES ('$this->title', '$this->url_image','$this->image','$this->description', '$this->rol_user', '$this->user_sesion', '$this->date_creation', '$this->user_creation')";
         $resp = parent::noQueryId($query);
 
         if ($resp) {
@@ -144,7 +151,7 @@ class Proyectos extends conexion
     private function actualizarProyectos()
     {
         $query = "UPDATE `tbl_proyectos` SET `title` = '$this->title',`url_image` = '$this->url_image',`image` = '$this->image' ,`description`='$this->description', `rol_user`='$this->rol_user', 
-         `status`='$this->status', `user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation', `user_creation`='$this->user_creation', `user_update`='$this->user_update' WHERE `id_project` = '$this->id_project'";
+         `user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation', `user_creation`='$this->user_creation', `user_update`='$this->user_update' WHERE `id_project` = '$this->id_project'";
         $resp = parent::noQuery($query);
         if ($resp) {
             return $resp;
