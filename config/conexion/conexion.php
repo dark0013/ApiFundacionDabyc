@@ -63,27 +63,20 @@ class conexion
 
     public function callProcedure($sqlstr)
     {
-
         $resultArray = array();
         $stmt = mysqli_prepare($this->conexion, $sqlstr);
         mysqli_stmt_execute($stmt);
+        
+        // Fetch the results of the stored procedure
         $select = mysqli_query($this->conexion, "SELECT @p0 AS COD_RESPONSE, @p1 AS MENSAGE_RESPONSE;");
-
-        /*  if (!$select) {
-            return "Error en la consulta: " . mysqli_error($this->conexion);
-            return;
-        }
-
-        if (mysqli_num_rows($select) > 0) {
-            $row = mysqli_fetch_assoc($select); */
-        foreach ($select as $key) {
-            $resultArray[] = $key;
-        }
+        $result = mysqli_fetch_assoc($select);
+        echo $result;
+        // Add the results to the result array
+        $resultArray[] = $result;
+        
         return $this->convertirUTF8($resultArray);
-        /* } else {
-            return "No se encontraron resultados";
-        } */
     }
+    
 
 
     public function obtenerDatos($sqlstr)

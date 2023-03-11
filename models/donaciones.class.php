@@ -7,6 +7,8 @@ class Donaciones extends conexion
 {
     private $tabla = "tbl_donaciones";
     private $id_donacion = "";
+    private $dni = "";
+
     private $type_products = "";
     private $quantity = "";
     private $description = "";
@@ -29,12 +31,15 @@ class Donaciones extends conexion
         return $datos;
     }
 
-    public function callProcedure($pagina = 1)
-    {
-        $query = "CALL PRC_DONACIONES(@p0, @p1);";
-        $datos = parent::callProcedure($query);
-        return $datos;
-    }
+
+
+
+
+
+
+
+
+
 
 
     public function obtenerIDonaciones($id)
@@ -48,23 +53,34 @@ class Donaciones extends conexion
 
     public function post($json)
     {
+
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
+
+
         if (!isset($datos["type_products"]) || !isset($datos["quantity"])) {
+
             return $_respuestas->error_400();
         } else {
+
             $this->type_products = $datos['type_products'];
             $this->quantity = $datos['quantity'];
             $this->description = $datos['description'];
             $this->status = $datos['status'];
             $this->date_creation = $datos['date_creation'];
 
-            $resp = $this->insertarDonaciones();
+            $resp = $this->PRC_DONACIONES();
+
+           /*  print_r($resp[0]['COD_RESPONSE']);
+            print_r('-->' . $resp[0]['MENSAGE_RESPONSE']); */
+
+            // $resp = $this->insertarDonaciones();
 
             if ($resp) {
                 $respuesta = $_respuestas->response;
                 $respuesta["result"] = array(
-                    "DonacionesId" => $resp
+                    "DonacionesId" =>   $resp[0]['COD_RESPONSE'],
+                    "mensaje" => $resp[0]['MENSAGE_RESPONSE']
                 );
 
                 return $respuesta;
@@ -74,6 +90,15 @@ class Donaciones extends conexion
         }
     }
 
+
+    public function PRC_DONACIONES()
+    {
+        $query = "CALL PRC_DONACIONES('$this->type_products', @p0, @p1)";
+        $datos = parent::callProcedure($query);
+    
+        return $datos;
+    }
+    
 
     private function insertarDonaciones()
     {
@@ -179,4 +204,3 @@ class Donaciones extends conexion
         }
     }
 }
-
