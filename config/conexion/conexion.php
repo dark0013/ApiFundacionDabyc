@@ -70,7 +70,7 @@ class conexion
         // Fetch the results of the stored procedure
         $select = mysqli_query($this->conexion, "SELECT @p0 AS COD_RESPONSE, @p1 AS MENSAGE_RESPONSE;");
         $result = mysqli_fetch_assoc($select);
-        echo $result;
+        
         // Add the results to the result array
         $resultArray[] = $result;
         

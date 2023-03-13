@@ -7,13 +7,21 @@ class Donaciones extends conexion
 {
     private $tabla = "tbl_donaciones";
     private $id_donacion = "";
+    private $name = "";
     private $dni = "";
-
+    private $email = "";
+    private $cellPhone = "";
     private $type_products = "";
+    private $donaciones = "";
+
+   // private $type_products = "";
     private $quantity = "";
     private $description = "";
     private $status = "";
     private $date_creation = "";
+
+
+   
 
     public function listarDonaciones($pagina = 1)
     {
@@ -93,7 +101,14 @@ class Donaciones extends conexion
 
     public function PRC_DONACIONES()
     {
-        $query = "CALL PRC_DONACIONES('$this->type_products', @p0, @p1)";
+        $query = "CALL PRC_DONACIONES( '$this->name',
+                                       '$this->dni',
+                                       '$this->email',
+                                       '$this->cellPhone',
+                                       '$this->type_products',
+                                       '$this->donaciones ',
+                                        @p0, @p1)";
+
         $datos = parent::callProcedure($query);
     
         return $datos;
