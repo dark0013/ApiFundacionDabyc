@@ -7,7 +7,7 @@ class Contactos extends conexion
 {
     private $tabla = "tbl_contactos";
     private $id_contacto = "";
-    private $indentication_card = "";
+    private $indentication = "";
     private $full_name = "";
     private $phone = "";
     private $email = "";
@@ -16,7 +16,7 @@ class Contactos extends conexion
     private $status = "";
     private $user_sesion = "";
     private $date_creation = "";
-    private $usur_creation = "";
+    private $user_creation = "";
     private $user_update = "";
 
     public function listarContactos($pagina = 1)
@@ -49,10 +49,10 @@ class Contactos extends conexion
     {
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
-        if (!isset($datos["indentication_card"]) || !isset($datos["full_name"])) {
+        if (!isset($datos["indentication"]) || !isset($datos["full_name"])) {
             return $_respuestas->error_400();
         } else {
-            $this->indentication_card = $datos['indentication_card'];
+            $this->indentication = $datos['indentication'];
             $this->full_name = $datos['full_name'];
             $this->phone = $datos['phone'];
             $this->email = $datos['email'];
@@ -61,7 +61,7 @@ class Contactos extends conexion
             $this->status = $datos['status'];
             $this->user_sesion = $datos['user_sesion'];
             $this->date_creation = $datos['date_creation'];
-            $this->usur_creation = $datos['usur_creation'];
+            $this->user_creation = $datos['user_creation'];
 
             $resp = $this->insertarContactos();
 
@@ -81,8 +81,8 @@ class Contactos extends conexion
 
     private function insertarContactos()
     {
-        $query = "INSERT INTO $this->tabla(indentication_card, full_name, phone, email, address, description, status, user_sesion, date_creation, usur_creation)
-         VALUES ('$this->indentication_card', '$this->full_name','$this->phone','$this->email','$this->address','$this->description','$this->status','$this->user_sesion','$this->date_creation','$this->usur_creation')";
+        $query = "INSERT INTO $this->tabla(indentication, full_name, phone, email, address, description, status, user_sesion, date_creation, user_creation)
+         VALUES ('$this->indentication', '$this->full_name','$this->phone','$this->email','$this->address','$this->description','$this->status','$this->user_sesion','$this->date_creation','$this->user_creation')";
         $resp = parent::noQueryId($query);
 
         if ($resp) {
@@ -98,11 +98,11 @@ class Contactos extends conexion
     {
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
-        if (!isset($datos["indentication_card"]) || !isset($datos["full_name"])) {
+        if (!isset($datos["indentication"]) || !isset($datos["full_name"])) {
             return $_respuestas->error_400();
         } else {
             $this->id_contacto = $datos['id_contacto'];
-            $this->indentication_card = $datos['indentication_card'];
+            $this->indentication = $datos['indentication'];
             $this->full_name = $datos['full_name'];
             $this->phone = $datos['phone'];
             $this->email = $datos['email'];
@@ -111,7 +111,7 @@ class Contactos extends conexion
             $this->status = $datos['status'];
             $this->user_sesion = $datos['user_sesion'];
             $this->date_creation = $datos['date_creation'];
-            $this->usur_creation = $datos['usur_creation'];
+            $this->user_creation = $datos['user_creation'];
             $this->user_update = $datos['user_update'];
             
             $resp = $this->actualizarContactos();
@@ -132,9 +132,9 @@ class Contactos extends conexion
 
     private function actualizarContactos()
     {
-        $query = "UPDATE `tbl_contactos` SET `indentication_card`='$this->indentication_card', `full_name`='$this->full_name', `phone`='$this->phone', `email`='$this->email',
+        $query = "UPDATE `tbl_contactos` SET `indentication`='$this->indentication', `full_name`='$this->full_name', `phone`='$this->phone', `email`='$this->email',
         `address`='$this->address',`description`='$this->description',`status`='$this->status',`user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation',
-        `usur_creation`='$this->usur_creation',`user_update`='$this->user_update' WHERE `id_contacto` = '$this->id_contacto'";
+        `user_creation`='$this->user_creation',`user_update`='$this->user_update' WHERE `id_contacto` = '$this->id_contacto'";
         //print_r($query);
         $resp = parent::noQuery($query);
         if ($resp) {

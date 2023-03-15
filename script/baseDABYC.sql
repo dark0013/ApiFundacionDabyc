@@ -9,8 +9,8 @@ CREATE TABLE `tbl_contactos` (
   `address` varchar(250) NOT NULL,
   `description` varchar(250) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
-  `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_sesion` datetime  CURRENT_TIMESTAMP NOT NULL,
+  `date_creation` datetime  CURRENT_TIMESTAMP NOT NULL,
   `user_creation` varchar(100) NOT NULL,
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_contacto`)
@@ -33,7 +33,7 @@ CREATE TABLE `tbl_donaciones` (
   `quantity` varchar(50) NOT NULL,
   `description` varchar(250) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` datetime  CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (`id_donacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
@@ -53,8 +53,8 @@ CREATE TABLE `tbl_productos` (
   `tipe_products` varchar(250) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
   `description` varchar(250) NOT NULL,
-  `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_sesion` datetime  CURRENT_TIMESTAMP NOT NULL,
+  `date_creation` datetime  CURRENT_TIMESTAMP NOT NULL,
   `user_creation` varchar(100) NOT NULL,
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_product`)
@@ -69,8 +69,8 @@ CREATE TABLE `tbl_proyectos` (
   `description` varchar(300) NOT NULL,
   `rol_user` varchar(100) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
-  `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_sesion` datetime  CURRENT_TIMESTAMP NOT NULL,
+  `date_creation` datetime  CURRENT_TIMESTAMP NOT NULL,
   `user_creation` varchar(100) NOT NULL,
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_project`)
@@ -83,8 +83,8 @@ CREATE TABLE `tbl_roles` (
   `cod_rol` varchar(5) NOT NULL,
   `user_name` varchar(200) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
-  `user_sesion` datetime DEFAULT CURRENT_TIMESTAMP,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_sesion` datetime  CURRENT_TIMESTAMP NOT NULL,
+  `date_creation` datetime  CURRENT_TIMESTAMP NOT NULL,
   `user_creation` varchar(100) NOT NULL,
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_rol`)
@@ -99,8 +99,8 @@ CREATE TABLE `tbl_usuario` (
   `name` varchar(250) NOT NULL,
   `pass` varchar(250) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
-  `user_sesion` datetime DEFAULT current_timestamp(),
-  `date_creation` datetime DEFAULT current_timestamp(),
+  `user_sesion` datetime  CURRENT_TIMESTAMP NOT NULL,
+  `date_creation` datetime  CURRENT_TIMESTAMP NOT NULL,
   `user_creation` varchar(100) NOT NULL,
   `user_update` varchar(100) NOT NULL,
     PRIMARY KEY (`id_user`)

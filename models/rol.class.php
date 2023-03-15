@@ -14,7 +14,7 @@ class Rol extends conexion
     private $status = "";
     private $user_sesion = "";
     private $date_creation = "";
-    private $usur_creation = "";
+    private $user_creation = "";
     private $user_update = "";
 
     public function listarRol($pagina = 1)
@@ -56,7 +56,7 @@ class Rol extends conexion
             $this->user_name = $datos['user_name'];
             $this->user_sesion = $datos['user_sesion'];
             $this->date_creation = $datos['date_creation'];
-            $this->usur_creation = $datos['usur_creation'];
+            $this->user_creation = $datos['user_creation'];
 
 
             $resp = $this->insertarRol();
@@ -77,8 +77,8 @@ class Rol extends conexion
 
     private function insertarRol()
     {
-        $query = "INSERT INTO $this->tabla(id_rol, rol_user, cod_rol, user_name,  user_sesion, date_creation, usur_creation)
-        VALUES ('$this->id_rol', '$this->rol_user', '$this->cod_rol','$this->user_name','$this->user_sesion', '$this->date_creation', '$this->usur_creation')";
+        $query = "INSERT INTO $this->tabla(id_rol, rol_user, cod_rol, user_name,  user_sesion, date_creation, user_creation)
+        VALUES ('$this->id_rol', '$this->rol_user', '$this->cod_rol','$this->user_name','$this->user_sesion', '$this->date_creation', '$this->user_creation')";
         $resp = parent::noQueryId($query);
 
         if ($resp) {
@@ -106,7 +106,8 @@ class Rol extends conexion
             $this->user_name = $datos['user_name'];
             $this->user_sesion = $datos['user_sesion'];
             $this->date_creation = $datos['date_creation'];
-            $this->usur_creation = $datos['usur_creation'];
+            $this->status = $datos['status'];
+            $this->user_update = $datos['user_update'];
 
 
             $resp = $this->actualizarRol();

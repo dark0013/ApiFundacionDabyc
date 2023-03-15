@@ -15,7 +15,7 @@ class Productos extends conexion
   private $description = "";
   private $user_sesion = "";
   private $date_creation = "";
-  private $usur_creation = "";
+  private $user_creation = "";
   private $user_update = "";
 
   public function listarProductos($pagina = 1)
@@ -58,7 +58,7 @@ class Productos extends conexion
       $this->description = $datos['description'];
       $this->user_sesion = $datos['user_sesion'];
       $this->date_creation = $datos['date_creation'];
-      $this->usur_creation = $datos['usur_creation'];
+      $this->user_creation = $datos['user_creation'];
 
       $resp = $this->insertarProductos();
 
@@ -78,8 +78,8 @@ class Productos extends conexion
 
   private function insertarProductos()
   {
-    $query = "INSERT INTO $this->tabla(id_product, name, quantity, tipe_products,  status, description, user_sesion,date_creation,usur_creation)
-         VALUES ('$this->id_product', '$this->name', '$this->quantity','$this->tipe_products','$this->status', '$this->description', '$this->user_sesion', '$this->date_creation', '$this->usur_creation')";
+    $query = "INSERT INTO $this->tabla(id_product, name, quantity, tipe_products,  status, description, user_sesion,date_creation,user_creation)
+         VALUES ('$this->id_product', '$this->name', '$this->quantity','$this->tipe_products','$this->status', '$this->description', '$this->user_sesion', '$this->date_creation', '$this->user_creation')";
     $resp = parent::noQueryId($query);
 
     if ($resp) {
@@ -107,7 +107,7 @@ class Productos extends conexion
       $this->description = $datos['description'];
       $this->user_sesion = $datos['user_sesion'];
       $this->date_creation = $datos['date_creation'];
-      $this->usur_creation = $datos['usur_creation'];
+      $this->user_creation = $datos['user_creation'];
 
       $resp = $this->actualizarProductos();
 
@@ -128,7 +128,7 @@ class Productos extends conexion
   private function actualizarProductos()
   {
     $query = "UPDATE `tbl_productos` SET `name` = '$this->name',`quantity` = '$this->quantity',`tipe_products` = '$this->tipe_products' ,`status`='$this->status', `description`='$this->description', 
-        `user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation', `usur_creation`='$this->usur_creation', `user_update`='$this->user_update' WHERE `id_product` = '$this->id_product'";
+        `user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation', `user_creation`='$this->user_creation', `user_update`='$this->user_update' WHERE `id_product` = '$this->id_product'";
     print_r($query);
     $resp = parent::noQuery($query);
     if ($resp) {
