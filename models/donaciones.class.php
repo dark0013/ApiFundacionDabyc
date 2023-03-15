@@ -13,6 +13,7 @@ class Donaciones extends conexion
     private $cellPhone = "";
     private $type_products = "";
     private $donaciones = "";
+    private $user = "";
 
    // private $type_products = "";
     private $quantity = "";
@@ -65,26 +66,28 @@ class Donaciones extends conexion
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
 
-
-        if (!isset($datos["type_products"]) || !isset($datos["quantity"])) {
-
-            return $_respuestas->error_400();
+       // print_r($datos);
+        if (!isset($datos["type_products"]) || !isset($datos["dni"])) {
+            print_r($datos);
+            return $json;
         } else {
 
+            $this->name = $datos['name'];
+            $this->dni = $datos['dni'];
+            $this->email = $datos['email'];
+            $this->cellPhone = $datos['cellPhone'];
             $this->type_products = $datos['type_products'];
-            $this->quantity = $datos['quantity'];
-            $this->description = $datos['description'];
-            $this->status = $datos['status'];
-            $this->date_creation = $datos['date_creation'];
+            $this->donaciones = $datos['donaciones'];
 
+           // echo ( $this->donaciones);
             $resp = $this->PRC_DONACIONES();
 
-           /*  print_r($resp[0]['COD_RESPONSE']);
-            print_r('-->' . $resp[0]['MENSAGE_RESPONSE']); */
+            print_r($resp[0]['COD_RESPONSE']);
+            print_r('-->' . $resp[0]['MENSAGE_RESPONSE']); 
 
             // $resp = $this->insertarDonaciones();
 
-            if ($resp) {
+          if ($resp) {
                 $respuesta = $_respuestas->response;
                 $respuesta["result"] = array(
                     "DonacionesId" =>   $resp[0]['COD_RESPONSE'],
@@ -107,8 +110,11 @@ class Donaciones extends conexion
                                        '$this->cellPhone',
                                        '$this->type_products',
                                        '$this->donaciones ',
-                                        @p0, @p1)";
+                                       '$this->user ',
+                                        @p0, 
+                                        @p1)";
 
+print ($query);                                        
         $datos = parent::callProcedure($query);
     
         return $datos;
