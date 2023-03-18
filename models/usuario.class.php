@@ -18,6 +18,7 @@ class Usuario extends conexion
     private $user_creation  = "";
     private $user_update  = "";
     private $status  = "";
+    private $date_creation = "";
 
     /*  Mostrar   */
 
@@ -79,6 +80,7 @@ class Usuario extends conexion
             $this->pass = $datos['pass'];
             $this->user_sesion = $datos['user_sesion'];
             $this->user_creation = $datos['user_creation'];
+            $this->date_creation = $datos['date_creation'];
 
 
             $resp = $this->insertarUsuario();
@@ -101,8 +103,8 @@ class Usuario extends conexion
 
     private function insertarUsuario()
     {
-        $query = "INSERT INTO `tbl_usuario`(name_users,id_rol, identification_card, name, pass, user_sesion, user_creation) 
-        VALUES ('$this->name_users','$this->id_rol', '$this->identification_card','$this->name', '$this->pass', '$this->user_sesion', '$this->user_creation')";
+        $query = "INSERT INTO `tbl_usuario`(name_users,id_rol, identification_card, name, pass, user_sesion, user_creation,date_creation) 
+        VALUES ('$this->name_users','$this->id_rol', '$this->identification_card','$this->name', '$this->pass', '$this->user_sesion', '$this->user_creation', '$this->date_creation')";
        
         $resp = parent::noQueryId($query);
 
