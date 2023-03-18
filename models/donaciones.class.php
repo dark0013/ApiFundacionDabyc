@@ -110,7 +110,7 @@ class Donaciones extends conexion
                                        '$this->cellPhone',
                                        '$this->type_products',
                                        '$this->donaciones ',
-                                       '$this->user ',
+                                       '8',
                                         @p0, 
                                         @p1)";
 
