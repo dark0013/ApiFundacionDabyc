@@ -28,13 +28,16 @@ CREATE TABLE `tbl_detalle_donacion` (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `tbl_donaciones` (
-  `id_donacion` int NOT NULL AUTO_INCREMENT,
+  `id_donacion` int(11) NOT NULL,
   `type_products` varchar(250) NOT NULL,
   `quantity` varchar(50) NOT NULL,
   `description` varchar(250) NOT NULL,
-  `status` char(5) DEFAULT 'S' NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_donacion`)
+  `status` char(5) NOT NULL DEFAULT 'P',
+  `date_creation` datetime DEFAULT current_timestamp(),
+  `nombres_apellidos` varchar(500) NOT NULL,
+  `cedula` varchar(17) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `correo` varchar(200) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `tbl_informacion_visual` (
