@@ -1,5 +1,5 @@
 CREATE DATABASE `bdabyc`;
-
+USE `bdabyc`;
 CREATE TABLE `tbl_contactos` (
   `id_contacto` int NOT NULL AUTO_INCREMENT,
   `indentication` varchar(50) NOT NULL,
@@ -10,9 +10,9 @@ CREATE TABLE `tbl_contactos` (
   `description` varchar(250) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
   `user_sesion` varchar(100) NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),,
   `user_creation` varchar(100) NOT NULL,
-  `date_update` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP(),,
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_contacto`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `tbl_donaciones` (
   `quantity` varchar(50) NOT NULL,
   `description` varchar(250) NOT NULL,
   `status` char(5) NOT NULL DEFAULT 'P',
-  `date_creation` datetime DEFAULT current_timestamp(),
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),
   `nombres_apellidos` varchar(500) NOT NULL,
   `cedula` varchar(17) NOT NULL,
   `telefono` varchar(20) NOT NULL,
@@ -56,9 +56,9 @@ CREATE TABLE `tbl_productos` (
   `description` varchar(250) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
   `user_sesion` varchar(100) NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_creation` varchar(100) NOT NULL,
-  `date_update` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_product`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
@@ -71,9 +71,9 @@ CREATE TABLE `tbl_proyectos` (
   `date_proyect` date DEFAULT CURRENT_TIMESTAMP,
   `status` char(5) DEFAULT 'A' NOT NULL,
   `user_sesion` varchar(100) NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_creation` varchar(100) NOT NULL,
-  `date_update` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_project`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
@@ -85,9 +85,9 @@ CREATE TABLE `tbl_roles` (
   `user_name` varchar(200) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
   `user_sesion` varchar(100) NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_creation` varchar(100) NOT NULL,
-  `date_update` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_rol`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
@@ -101,9 +101,9 @@ CREATE TABLE `tbl_usuario` (
   `pass` varchar(250) NOT NULL,
   `status` char(5) DEFAULT 'S' NOT NULL,
   `user_sesion` varchar(100) NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_creation` varchar(100) NOT NULL,
-  `date_update` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_user`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
