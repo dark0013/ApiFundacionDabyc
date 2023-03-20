@@ -10,13 +10,13 @@ class Proyectos extends conexion
     private $id_project = "";
     private $title = "";
     private $url_image = "";
-    private $image = "";
     private $description = "";
-    private $rol_user = "";
+    private $date_proyect = "";
     private $status = "";
     private $user_sesion = "";
     private $date_creation = "";
     private $user_creation = "";
+    private $date_update = "";
     private $user_update = "";
 
     public function listarProyectos($pagina = 1)
@@ -54,8 +54,6 @@ class Proyectos extends conexion
 
     public function post($json)
     {
-      
-        
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
 
@@ -68,7 +66,6 @@ class Proyectos extends conexion
 
         if (!isset($datos["title"]) || !isset($datos["user_sesion"])) {
             return $_respuestas->error_400();
-            
         } else {
             $this->title = $datos['title'];
 
@@ -76,16 +73,15 @@ class Proyectos extends conexion
             $this->url_image =  $this->procesarImagen($datos['url_image']);
 
 
-            $this->image = $datos['image'];
             $this->description = $datos['description'];
-            $this->rol_user = $datos['rol_user'];
+            $this->date_proyect = $datos['date_proyect'];
             $this->status = $datos['status'];
             $this->user_sesion = $datos['user_sesion'];
             $this->date_creation = $datos['date_creation'];
             $this->user_creation = $datos['user_creation'];
 
             $resp = $this->insertarProyectos();
-            echo  $resp;
+
             if ($resp) {
                 $respuesta = $_respuestas->response;
                 $respuesta["result"] = array(
@@ -102,8 +98,8 @@ class Proyectos extends conexion
 
     private function insertarProyectos()
     {
-        $query = "INSERT INTO `tbl_proyectos`(title, url_image, image,  description, rol_user,user_sesion,date_creation,user_creation)
-        VALUES ('$this->title', '$this->url_image','$this->image','$this->description', '$this->rol_user', '$this->user_sesion', '$this->date_creation', '$this->user_creation')";
+        $query = "INSERT INTO `tbl_proyectos`(title, url_image,  description,date_proyect, status,user_sesion,date_creation,user_creation)
+        VALUES ('$this->title','$this->url_image','$this->description', '$this->date_proyect','$this->status','$this->user_sesion', '$this->date_creation', '$this->user_creation')";
         $resp = parent::noQueryId($query);
 
         if ($resp) {
@@ -118,7 +114,6 @@ class Proyectos extends conexion
 
     public function put($json)
     {
-        
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
         if (!isset($datos["id_project"]) || !isset($datos["user_sesion"])) {
@@ -127,35 +122,31 @@ class Proyectos extends conexion
             $this->id_project = $datos['id_project'];
             $this->title = $datos['title'];
             $this->url_image =  $this->procesarImagen($datos['url_image']);
-            $this->image = $datos['image'];
+            $this->date_proyect = $datos['date_proyect'];
+            $this->date_update = $datos['date_update'];
             $this->description = $datos['description'];
-            $this->rol_user = $datos['rol_user'];
-            $this->status = $datos['status'];
             $this->user_sesion = $datos['user_sesion'];
-            $this->date_creation = $datos['date_creation'];
-            $this->user_creation = $datos['user_creation'];
             $this->user_update = $datos['user_update'];
-
+    
             $resp = $this->actualizarProyectos();
-         
             if ($resp) {
                 $respuesta = $_respuestas->response;
                 $respuesta["result"] = array(
-                    "id_project" => $resp
+                    "id_project" => $this->id_project
                 );
-
+    
                 return $respuesta;
             } else {
                 return $_respuestas->error_500();
             }
         }
     }
-
-
+    
+    
     private function actualizarProyectos()
     {
-        $query = "UPDATE `tbl_proyectos` SET `title` = '$this->title',`url_image` = '$this->url_image',`image` = '$this->image' ,`description`='$this->description', `rol_user`='$this->rol_user', 
-         `user_sesion`='$this->user_sesion', `date_creation`='$this->date_creation', `user_creation`='$this->user_creation', `user_update`='$this->user_update' WHERE `id_project` = '$this->id_project'";
+        $query = "UPDATE `tbl_proyectos` SET `title` = '$this->title',`url_image` = '$this->url_image',`description`='$this->description', 
+        `date_proyect`='$this->date_proyect',`user_sesion`='$this->user_sesion', `date_update`='$this->date_update', `user_update`='$this->user_update' WHERE `id_project` = '$this->id_project'";
         $resp = parent::noQuery($query);
         if ($resp) {
             return $resp;
@@ -163,6 +154,7 @@ class Proyectos extends conexion
             return 0;
         }
     }
+    
 
     /* DELETE */
 
@@ -179,7 +171,6 @@ class Proyectos extends conexion
             $this->id_project = $datos['id_project'];
 
             $resp = $this->eliminarProyectos();
-          
 
             if ($resp) {
                 $respuesta = $_respuestas->response;
@@ -216,7 +207,10 @@ class Proyectos extends conexion
     {
         // Obtener la ruta base de la aplicación en el servidor
         $ruta_base = $_SERVER['DOCUMENT_ROOT'] . '/ApiFundacionDabyc/public/imagenes/';
-    
+         // Verificar si la carpeta "imagenes" existe, si no, crearla
+        if (!file_exists($ruta_base)) {
+            mkdir($ruta_base, 0777, true);
+        }
         // Obtener la extensión de la imagen a partir del tipo MIME
         $partes = explode(";base64,", $imagen);
         $mime_type = $partes[0];
@@ -237,7 +231,4 @@ class Proyectos extends conexion
         // Devolver la URL completa de la imagen guardada
         return 'http://' . $_SERVER['HTTP_HOST'] . '/ApiFundacionDabyc/public/imagenes/' . $nombre_archivo;
     }
-    
-
-    
 }
