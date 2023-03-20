@@ -15,14 +15,14 @@ class Donaciones extends conexion
     private $donaciones = "";
     private $user = "";
 
-   // private $type_products = "";
+    // private $type_products = "";
     private $quantity = "";
     private $description = "";
     private $status = "";
     private $date_creation = "";
 
 
-   
+
 
     public function listarDonaciones($pagina = 1)
     {
@@ -41,21 +41,49 @@ class Donaciones extends conexion
     }
 
 
-
-
-
-
-
-
-
-
-
-
     public function obtenerIDonaciones($id)
     {
         $query = "select * from $this->tabla where id_user  = $id";
         return $datos = parent::obtenerDatos($query);
     }
+
+    public function reportDonaciones($json)
+    {
+        $_respuestas = new respuestas;
+        $datos = json_decode($json, true);
+
+        $select = "SELECT * FROM `tbl_donaciones`";
+
+        $where = "";
+        $fecha = "";
+
+        echo "===>" . $datos["fecha_fin"];
+
+        if (($datos["dni"] != "") && ($datos["fecha_inicio"] == "") && ($datos["fecha_fin"] == "")) {
+            $where = " WHERE `cedula` = '" . $datos["dni"] . "'";
+        } else if (($datos["dni"] == "") && ($datos["fecha_inicio"] != "") && ($datos["fecha_fin"] != "")) {
+            $where = " WHERE `cedula` = '" . $datos["dni"] . "'";
+            $fecha = " AND DATE_FORMAT(date_creation, '%d/%m/%Y') >= '" . $datos["fecha_inicio"] . "'
+                AND DATE_FORMAT(date_creation, '%d/%m/%Y') <= '" . $datos["fecha_fin"] . "'";
+        } else if (($datos["dni"] == "") && ($datos["fecha_inicio"] == "") && ($datos["fecha_fin"] == "")) {
+            $select = "SELECT * FROM `tbl_donaciones`";
+        }
+
+        $query = $select . $where . $fecha;
+        $resp = parent::obtenerDatos($query);
+
+        if ($resp) {
+            $respuesta = $_respuestas->response;
+            $respuesta["result"] = $resp;
+
+            return $respuesta;
+        } else {
+            return $_respuestas->error_200("No hay registro");
+        }
+
+    }
+
+
 
     /* POST */
 
@@ -66,7 +94,7 @@ class Donaciones extends conexion
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
 
-       // print_r($datos);
+        // print_r($datos);
         if (!isset($datos["type_products"]) || !isset($datos["dni"])) {
             print_r($datos);
             return $json;
@@ -79,19 +107,14 @@ class Donaciones extends conexion
             $this->type_products = $datos['type_products'];
             $this->donaciones = $datos['donaciones'];
 
-           // echo ( $this->donaciones);
-            $resp = $this->PRC_DONACIONES();
+            $resp = $this->insertarDonaciones();
 
-            print_r($resp[0]['COD_RESPONSE']);
-            print_r('-->' . $resp[0]['MENSAGE_RESPONSE']); 
 
-            // $resp = $this->insertarDonaciones();
-
-          if ($resp) {
+            if ($resp) {
                 $respuesta = $_respuestas->response;
                 $respuesta["result"] = array(
-                    "DonacionesId" =>   $resp[0]['COD_RESPONSE'],
-                    "mensaje" => $resp[0]['MENSAGE_RESPONSE']
+                    "id_information" => $resp,
+                    "cadena =>" => $json
                 );
 
                 return $respuesta;
@@ -101,37 +124,27 @@ class Donaciones extends conexion
         }
     }
 
-
-    public function PRC_DONACIONES()
-    {
-        $query = "CALL PRC_DONACIONES( '$this->name',
-                                       '$this->dni',
-                                       '$this->email',
-                                       '$this->cellPhone',
-                                       '$this->type_products',
-                                       '$this->donaciones ',
-                                       '8',
-                                        @p0, 
-                                        @p1)";
-
-print ($query);                                        
-        $datos = parent::callProcedure($query);
-    
-        return $datos;
-    }
-    
-
     private function insertarDonaciones()
     {
-        $query = "INSERT INTO $this->tabla(type_products, quantity, description,status,date_creation)
-         VALUES ('$this->type_products', '$this->quantity','$this->description','$this->status','$this->date_creation')";
-        $resp = parent::noQueryId($query);
+        $campos = "INSERT INTO `tbl_donaciones`(`type_products`, `quantity`, `description`, `nombres_apellidos`, `cedula`, `telefono`, `correo`) ";
 
-        if ($resp) {
-            return $resp;
-        } else {
-            return 0;
+        $donacionJson = json_decode($this->donaciones);
+
+        foreach ($donacionJson as $donacion) {
+            $producto = $donacion->producto;
+            $cantidad = $donacion->cantidad;
+
+            $insert = "VALUES ('$producto','$cantidad','$this->description','$this->name','$this->dni','$this->cellPhone','$this->email')";
+            $query = $campos . $insert;
+
+            $resp = parent::noQueryId($query);
+
+            if (!$resp) {
+                return 0;
+            }
         }
+
+        return $resp;
     }
 
     /* PuT */

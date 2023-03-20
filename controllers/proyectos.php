@@ -40,6 +40,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     #recibir los datos enviados
     $postBody = file_get_contents("php://input");
     #enviamos los datos al manejador
+   
     $datosArray = $_Proyectos->post($postBody);
 
     //devolvemos una respuestas

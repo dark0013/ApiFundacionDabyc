@@ -26,6 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo json_encode($datosDonaciones);
         http_response_code(200);
     }
+    else if (isset($_GET["info"])) {
+        $postBody = file_get_contents("php://input");
+        $datosReportDonaciones = $_Donaciones->reportDonaciones($postBody);
+        header("Content-Type: application/json");
+        echo json_encode($datosReportDonaciones);
+        http_response_code(200);
+    }
 
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {
