@@ -54,6 +54,8 @@ class Proyectos extends conexion
 
     public function post($json)
     {
+      
+        
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
 
@@ -66,6 +68,7 @@ class Proyectos extends conexion
 
         if (!isset($datos["title"]) || !isset($datos["user_sesion"])) {
             return $_respuestas->error_400();
+            
         } else {
             $this->title = $datos['title'];
 
@@ -82,7 +85,7 @@ class Proyectos extends conexion
             $this->user_creation = $datos['user_creation'];
 
             $resp = $this->insertarProyectos();
-
+            echo  $resp;
             if ($resp) {
                 $respuesta = $_respuestas->response;
                 $respuesta["result"] = array(
@@ -115,6 +118,7 @@ class Proyectos extends conexion
 
     public function put($json)
     {
+        
         $_respuestas = new respuestas;
         $datos = json_decode($json, true);
         if (!isset($datos["id_project"]) || !isset($datos["user_sesion"])) {
@@ -133,7 +137,7 @@ class Proyectos extends conexion
             $this->user_update = $datos['user_update'];
 
             $resp = $this->actualizarProyectos();
-
+         
             if ($resp) {
                 $respuesta = $_respuestas->response;
                 $respuesta["result"] = array(
@@ -175,6 +179,7 @@ class Proyectos extends conexion
             $this->id_project = $datos['id_project'];
 
             $resp = $this->eliminarProyectos();
+          
 
             if ($resp) {
                 $respuesta = $_respuestas->response;
@@ -211,23 +216,28 @@ class Proyectos extends conexion
     {
         // Obtener la ruta base de la aplicación en el servidor
         $ruta_base = $_SERVER['DOCUMENT_ROOT'] . '/ApiFundacionDabyc/public/imagenes/';
-
+    
         // Obtener la extensión de la imagen a partir del tipo MIME
         $partes = explode(";base64,", $imagen);
         $mime_type = $partes[0];
         $extension = explode("/", $mime_type)[1];
-
+      
+    
         // Decodificar la imagen base64 a su formato binario original
         $imagen_binaria = base64_decode($partes[1]);
-
+    
         // Generar un nombre único para el archivo de imagen
         $nombre_archivo = uniqid() . "." . $extension;
-
+       
         // Guardar la imagen en el servidor
         $ruta_archivo = $ruta_base . $nombre_archivo;
+       // print($nombre_archivo) ;
         file_put_contents($ruta_archivo, $imagen_binaria);
-
+    
         // Devolver la URL completa de la imagen guardada
         return 'http://' . $_SERVER['HTTP_HOST'] . '/ApiFundacionDabyc/public/imagenes/' . $nombre_archivo;
     }
+    
+
+    
 }
