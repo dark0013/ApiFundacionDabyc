@@ -47,6 +47,24 @@ class Donaciones extends conexion
         return $datos = parent::obtenerDatos($query);
     }
 
+    public function obtenerDonantes($pagina = 1)
+    {
+        {
+            $inicio = 0;
+            $cantidad = 100;
+    
+            if ($pagina > 1) {
+                $inicio = $cantidad * ($pagina - 1) + 1;
+                $cantidad = $cantidad * $pagina;
+            }
+    
+            $query = "select id_donacion,cedula,nombres_apellidos,telefono,correo,date_creation from $this->tabla limit $inicio,$cantidad";
+            //print_r($query);
+            $datos = parent::obtenerDatos($query);
+            return $datos;
+        }
+    }
+
     public function reportDonaciones($json)
     {
         $_respuestas = new respuestas;
@@ -134,7 +152,7 @@ class Donaciones extends conexion
             $producto = $donacion->producto;
             $cantidad = $donacion->cantidad;
 
-            $insert = "VALUES ('$producto','$cantidad','$this->description','$this->name','$this->dni','$this->cellPhone','$this->email')";
+            $insert = "VALUES ('$this->type_products','$cantidad','$producto','$this->name','$this->dni','$this->cellPhone','$this->email')";
             $query = $campos . $insert;
 
             $resp = parent::noQueryId($query);

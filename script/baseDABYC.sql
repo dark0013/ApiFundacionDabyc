@@ -8,11 +8,11 @@ CREATE TABLE `tbl_contactos` (
   `email` char(100) NOT NULL,
   `address` varchar(250) NOT NULL,
   `description` varchar(250) NOT NULL,
-  `status` char(5) DEFAULT 'S' NOT NULL,
+  `status` char(5) NOT NULL,
   `user_sesion` varchar(100) NOT NULL,
-  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),,
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_creation` varchar(100) NOT NULL,
-  `date_update` datetime DEFAULT CURRENT_TIMESTAMP(),,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP(),
   `user_update` varchar(100) NOT NULL,
   PRIMARY KEY (`id_contacto`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `tbl_detalle_donacion` (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `tbl_donaciones` (
-  `id_donacion` int(11) NOT NULL,
+  `id_donacion`  int NOT NULL AUTO_INCREMENT,
   `type_products` varchar(250) NOT NULL,
   `quantity` varchar(50) NOT NULL,
   `description` varchar(250) NOT NULL,
@@ -37,7 +37,8 @@ CREATE TABLE `tbl_donaciones` (
   `nombres_apellidos` varchar(500) NOT NULL,
   `cedula` varchar(17) NOT NULL,
   `telefono` varchar(20) NOT NULL,
-  `correo` varchar(200) NOT NULL
+  `correo` varchar(200) NOT NULL,
+    PRIMARY KEY (`id_donacion`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `tbl_informacion_visual` (

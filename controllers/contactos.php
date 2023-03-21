@@ -27,6 +27,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         http_response_code(200);
     }
 
+    else if (isset($_GET["pageC"])) {
+        $pagina = $_GET["pageC"];
+        $listarpPersonasAcontactar= $_Contactos->listarpPersonasAcontactar($pagina);
+        header("Content-Type: application/json");
+        echo json_encode($listarpPersonasAcontactar);
+    }
+    else if (isset($_GET["pageS"])) {
+        $pagina = $_GET["pageS"];
+        $listarPersonasSubscritas= $_Contactos->listarPersonasSubscritas($pagina);
+        header("Content-Type: application/json");
+        echo json_encode($listarPersonasSubscritas);
+    }
+
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     #recibir los datos enviados

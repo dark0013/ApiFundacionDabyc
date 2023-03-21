@@ -33,6 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo json_encode($datosReportDonaciones);
         http_response_code(200);
     }
+    else if (isset($_GET["pageD"])) {
+        $pagina = $_GET["pageD"];
+        $obtenerDonantes= $_Donaciones->obtenerDonantes($pagina);
+        header("Content-Type: application/json");
+        echo json_encode($obtenerDonantes);
+        http_response_code(200);
+    } 
 
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {

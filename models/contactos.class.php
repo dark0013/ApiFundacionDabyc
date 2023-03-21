@@ -35,6 +35,38 @@ class Contactos extends conexion
         return $datos;
     }
 
+    public function listarpPersonasAcontactar($pagina = 1)
+    {
+        $inicio = 0;
+        $cantidad = 100;
+
+        if ($pagina > 1) {
+            $inicio = $cantidad * ($pagina - 1) + 1;
+            $cantidad = $cantidad * $pagina;
+        }
+
+        $query = "select * from $this->tabla where status = 'C' limit $inicio,$cantidad";
+        //print_r($query);
+        $datos = parent::obtenerDatos($query);
+        return $datos;
+    }
+
+    public function listarPersonasSubscritas($pagina = 1)
+    {
+        $inicio = 0;
+        $cantidad = 100;
+
+        if ($pagina > 1) {
+            $inicio = $cantidad * ($pagina - 1) + 1;
+            $cantidad = $cantidad * $pagina;
+        }
+
+        $query = "select * from $this->tabla where status = 'S' limit $inicio,$cantidad";
+        //print_r($query);
+        $datos = parent::obtenerDatos($query);
+        return $datos;
+    }
+
 
     public function obtenerIdContactos($id)
     {
