@@ -1,9 +1,9 @@
 {
     "conexion":{
         "server" : "localhost",
-        "user" : "fundac26_dabyc",
-        "password" : "MSM8#.+P@$75",
-        "database" : "fundac26_db_dabyc",
+        "user" : "root",
+        "password" : "",
+        "database" : "bdabyc",
         "port": "3306"
     }
 }
