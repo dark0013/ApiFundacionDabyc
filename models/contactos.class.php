@@ -29,7 +29,7 @@ class Contactos extends conexion
             $cantidad = $cantidad * $pagina;
         }
 
-        $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} LIMIT $inicio, $cantidad";
         //print_r($query);
         $datos = parent::obtenerDatos($query);
         return $datos;
@@ -211,7 +211,7 @@ class Contactos extends conexion
 
     private function eliminarContactos()
     {
-        $query = "DELETE FROM $this->tabla WHERE id_contacto='$this->id_contacto'";
+        $query = "UPDATE `tbl_contactos` SET `status` ='I' WHERE `id_contacto` = '$this->id_contacto'";
 
         $resp = parent::noQuery($query);
 

@@ -21,7 +21,7 @@ class Informacion_visual extends conexion
             $cantidad = $cantidad * $pagina;
         }
 
-        $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} WHERE status = 'S' LIMIT $inicio, $cantidad";
         //print_r($query);
         $datos = parent::obtenerDatos($query);
         return $datos;

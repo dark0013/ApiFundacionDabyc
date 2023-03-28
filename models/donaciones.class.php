@@ -34,7 +34,7 @@ class Donaciones extends conexion
             $cantidad = $cantidad * $pagina;
         }
 
-        $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} WHERE status = 'P' LIMIT $inicio, $cantidad";
         //print_r($query);
         $datos = parent::obtenerDatos($query);
         return $datos;
@@ -245,7 +245,7 @@ class Donaciones extends conexion
 
     private function eliminarDonaciones()
     {
-        $query = "DELETE FROM $this->tabla WHERE id_donacion='$this->id_donacion'";
+        $query = "UPDATE `tbl_donaciones` SET `status` ='I' WHERE `id_donacion` = '$this->id_donacion'";
 
         $resp = parent::noQuery($query);
 

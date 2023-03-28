@@ -28,7 +28,7 @@ class Productos extends conexion
       $cantidad = $cantidad * $pagina;
     }
 
-    $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} WHERE status = 'P' LIMIT $inicio, $cantidad";
     //print_r($query);
     $datos = parent::obtenerDatos($query);
     return $datos;
@@ -172,7 +172,7 @@ class Productos extends conexion
 
   private function eliminarProductos()
   {
-    $query = "DELETE FROM $this->tabla WHERE id_product='$this->id_product'";
+        $query = "UPDATE `tbl_productos` SET `status` ='I' WHERE `id_product` = '$this->id_product'";
 
     $resp = parent::noQuery($query);
 

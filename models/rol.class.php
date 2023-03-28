@@ -27,7 +27,8 @@ class Rol extends conexion
             $cantidad = $cantidad * $pagina;
         }
 
-        $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} WHERE status = 'S' LIMIT $inicio, $cantidad";
+
         //print_r($query);
         $datos = parent::obtenerDatos($query);
         return $datos;
@@ -173,7 +174,7 @@ class Rol extends conexion
   
       private function eliminarUsuario()
       {
-          $query = "DELETE FROM $this->tabla WHERE id_rol='$this->id_rol'";
+        $query = "UPDATE `tbl_roles` SET `status` ='I' WHERE `id_rol` = '$this->id_rol'";
   
           $resp = parent::noQuery($query);
   

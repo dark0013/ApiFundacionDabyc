@@ -29,7 +29,8 @@ class Proyectos extends conexion
             $cantidad = $cantidad * $pagina;
         }
 
-        $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} WHERE status = 'S' LIMIT $inicio, $cantidad";
+
         //print_r($query);
         $datos = parent::obtenerDatos($query);
         return $datos;
@@ -190,8 +191,7 @@ class Proyectos extends conexion
 
     private function eliminarProyectos()
     {
-        $query = "DELETE FROM $this->tabla WHERE `id_project`='$this->id_project'";
-
+        $query = "UPDATE `tbl_proyectos` SET `status` ='I' WHERE `id_project` = '$this->id_project'";
         $resp = parent::noQuery($query);
 
         if ($resp >= 1) {

@@ -32,7 +32,8 @@ class Usuario extends conexion
             $cantidad = $cantidad * $pagina;
         }
 
-        $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} WHERE status = 'S' LIMIT $inicio, $cantidad";
+
         //print_r($query);
         $datos = parent::obtenerDatos($query);
         return $datos;
@@ -209,7 +210,7 @@ class Usuario extends conexion
 
     private function eliminarUsuario()
     {
-        $query = "DELETE FROM $this->tabla WHERE id_user='$this->id_user'";
+        $query = "UPDATE `tbl_usuario` SET `status` ='I' WHERE `id_user` = '$this->id_user'";
 
         $resp = parent::noQuery($query);
 

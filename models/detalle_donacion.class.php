@@ -23,7 +23,7 @@ class Detalle_donacion extends conexion
             $cantidad = $cantidad * $pagina;
         }
 
-        $query = "select * from $this->tabla limit $inicio,$cantidad";
+        $query = "SELECT * FROM {$this->tabla} WHERE status = 'S' LIMIT $inicio, $cantidad";
         //print_r($query);
         $datos = parent::obtenerDatos($query);
         return $datos;
@@ -161,7 +161,7 @@ class Detalle_donacion extends conexion
 
     private function eliminarDetalle_donacion()
     {
-        $query = "DELETE FROM $this->tabla WHERE id_detalle='$this->id_detalle'";
+        $query = "UPDATE `tbl_detalle_donacion` SET `status` ='I' WHERE `id_detalle` = '$this->id_detalle'";
 
         $resp = parent::noQuery($query);
 
