@@ -10,6 +10,7 @@ class Proyectos extends conexion
     private $id_project = "";
     private $title = "";
     private $url_image = "";
+    private $video_link ="";
     private $description = "";
     private $date_proyect = "";
     private $status = "";
@@ -75,6 +76,7 @@ class Proyectos extends conexion
 
 
             $this->description = $datos['description'];
+            $this->video_link = $datos['video_link'];
             $this->date_proyect = $datos['date_proyect'];
             $this->status = $datos['status'];
             $this->user_sesion = $datos['user_sesion'];
@@ -99,8 +101,8 @@ class Proyectos extends conexion
 
     private function insertarProyectos()
     {
-        $query = "INSERT INTO `tbl_proyectos`(title, url_image,  description,date_proyect, status,user_sesion,date_creation,user_creation)
-        VALUES ('$this->title','$this->url_image','$this->description', '$this->date_proyect','$this->status','$this->user_sesion', '$this->date_creation', '$this->user_creation')";
+        $query = "INSERT INTO `tbl_proyectos`(title, url_image,video_link,  description,date_proyect, status,user_sesion,date_creation,user_creation)
+        VALUES ('$this->title','$this->url_image','$this->video_link','$this->description', '$this->date_proyect','$this->status','$this->user_sesion', '$this->date_creation', '$this->user_creation')";
         $resp = parent::noQueryId($query);
 
         if ($resp) {
@@ -124,6 +126,7 @@ class Proyectos extends conexion
             $this->title = $datos['title'];
             $this->url_image =  $this->procesarImagen($datos['url_image']);
             $this->date_proyect = $datos['date_proyect'];
+            $this->video_link = $datos['video_link'];
             $this->date_update = $datos['date_update'];
             $this->description = $datos['description'];
             $this->user_sesion = $datos['user_sesion'];
@@ -146,7 +149,7 @@ class Proyectos extends conexion
     
     private function actualizarProyectos()
     {
-        $query = "UPDATE `tbl_proyectos` SET `title` = '$this->title',`url_image` = '$this->url_image',`description`='$this->description', 
+        $query = "UPDATE `tbl_proyectos` SET `title` = '$this->title',`url_image` = '$this->url_image', `video_link` = '$this->video_link',`description`='$this->description', 
         `date_proyect`='$this->date_proyect',`user_sesion`='$this->user_sesion', `date_update`='$this->date_update', `user_update`='$this->user_update' WHERE `id_project` = '$this->id_project'";
         $resp = parent::noQuery($query);
         if ($resp) {

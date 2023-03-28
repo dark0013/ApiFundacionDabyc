@@ -68,6 +68,7 @@ CREATE TABLE `tbl_proyectos` (
   `id_project` int NOT NULL AUTO_INCREMENT,
   `title` varchar(250) NOT NULL,
   `url_image` varchar(250) NOT NULL,
+    `video_link` text NOT NULL,
   `description` text NOT NULL,
   `date_proyect` date DEFAULT CURRENT_TIMESTAMP,
   `status` char(5) DEFAULT 'A' NOT NULL,
