@@ -1,0 +1,8 @@
+/* DB_CONNECTION=mysql
+DB_HOST_local=127.0.0.1
+#DB_PORT=3306
+DB_HOST_HOSTING=localhost
+DB_PORT_HOSTING=5522
+DB_DATABASE=istghknj_key_passwords
+DB_USERNAME=istghknj_root
+DB_PASSWORD=$DFx$w]{GQ10 */

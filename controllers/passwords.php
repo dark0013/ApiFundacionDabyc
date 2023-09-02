@@ -1,47 +1,46 @@
 <?php
 require_once "../config/respuesta.class.php";
-require_once "../models/proyectos.class.php";
+require_once "../models/passwords.class.php";
 require_once "../config/permisos.class.php";
 
 $_encabezado = new PermisosEncabezados;
 $_encabezado->PermisosEncabezados();
 
 $_respuestas = new respuestas;
-$_Proyectos = new Proyectos;
+$_Passwords = new Passwords;
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     if (isset($_GET["page"])) {
         $pagina = $_GET["page"];
-        $listarProyectos= $_Proyectos->listarProyectos($pagina);
+        $listarPasswords = $_Passwords->listarPasswords($pagina);
         header("Content-Type: application/json");
-        echo json_encode($listarProyectos);
+        echo json_encode($listarPasswords);
         http_response_code(200);
     } 
-
-    if (isset($_GET["countProyect"])) {
-        $pagina = $_GET["countProyect"];
-        $listarProyectos = $_Proyectos->CountProyectos($pagina);
+    if (isset($_GET["countPasswords"])) {
+        $pagina = $_GET["countPasswords"];
+        $listarPasswords = $_Passwords->CountPasswords($pagina);
         header("Content-Type: application/json");
-        echo json_encode($listarProyectos);
+        echo json_encode($listarPasswords);
         http_response_code(200);
     } 
-
-    else if (isset($_GET["id"])) {
-        $ProyectosID = $_GET["id"];
-        $datosProyectos = $_Proyectos->obtenerProyectos($_ProyectosID);
+    
+    else if (isset($_GET["iduser"])) {
+        $PasswordsID = $_GET["iduser"];
+        $datosPasswords = $_Passwords->obtenerPasswords($PasswordsID);
         header("Content-Type: application/json");
-        echo json_encode($datosProyectos);
+        echo json_encode($datosPasswords);
         http_response_code(200);
     }
+
 
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     #recibir los datos enviados
     $postBody = file_get_contents("php://input");
     #enviamos los datos al manejador
-   
-    $datosArray = $_Proyectos->post($postBody);
+    $datosArray = $_Passwords->post($postBody);
 
     //devolvemos una respuestas
     header('Content-Type: application/json');
@@ -53,11 +52,12 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     echo json_encode($datosArray);
 }
+
 else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
     //recibimos los datos enviados
     $postBody = file_get_contents("php://input");
     //enviamos datos al manejador
-    $datosArray = $_Proyectos->put($postBody);
+    $datosArray = $_Passwords->put($postBody);
     //delvovemos una respuesta 
 
     header('Content-Type: application/json');
@@ -69,11 +69,12 @@ else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
     }
     echo json_encode($datosArray);
 } 
+
 else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     //recibimos los datos enviados
     $postBody = file_get_contents("php://input");
     //enviamos datos al manejador
-    $datosArray = $_Proyectos->delete($postBody);
+    $datosArray = $_Passwords->delete($postBody);
     //delvovemos una respuesta 
 
     header('Content-Type: application/json');

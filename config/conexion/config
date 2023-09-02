@@ -1,9 +1,10 @@
 {
     "conexion":{
         "server" : "localhost",
-        "user" : "root",
-        "password" : "",
-        "database" : "bdabyc",
+        "user" : "istghknj_root",
+        "password" : "$DFx$w]{GQ10",
+        "database" : "istghknj_key_passwords",
         "port": "3306"
     }
 }
+

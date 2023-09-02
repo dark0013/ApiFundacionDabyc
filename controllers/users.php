@@ -1,38 +1,46 @@
 <?php
 require_once "../config/respuesta.class.php";
-require_once "../models/informacion_visual.class.php";
+require_once "../models/users.class.php";
 require_once "../config/permisos.class.php";
 
 $_encabezado = new PermisosEncabezados;
 $_encabezado->PermisosEncabezados();
 
 $_respuestas = new respuestas;
-$_Informacion_visual = new Informacion_visual;
+$_Usuario = new Usuario;
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     if (isset($_GET["page"])) {
         $pagina = $_GET["page"];
-        $listarInformacion_visual= $_Informacion_visual->listarInformacion_visual($pagina);
+        $listarUsuario = $_Usuario->listarUsuario($pagina);
         header("Content-Type: application/json");
-        echo json_encode($listarInformacion_visual);
+        echo json_encode($listarUsuario);
         http_response_code(200);
     } 
-
-    else if (isset($_GET["id"])) {
-        $listarInformacion_visualID = $_GET["id"];
-        $datoslistarInformacion_visual = $_Informacion_visual->obtenerInformacion_visual($_Informacion_visualID);
+    if (isset($_GET["countUsers"])) {
+        $pagina = $_GET["countUsers"];
+        $listarUsuario = $_Usuario->CountUsuario($pagina);
         header("Content-Type: application/json");
-        echo json_encode($datosInformacion_visual);
+        echo json_encode($listarUsuario);
+        http_response_code(200);
+    } 
+    
+    else if (isset($_GET["id"])) {
+        $UsuarioID = $_GET["id"];
+        $datosUsuario = $_Usuario->obtenerUsuario($UsuarioID);
+        header("Content-Type: application/json");
+        echo json_encode($datosUsuario);
         http_response_code(200);
     }
+
 
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     #recibir los datos enviados
     $postBody = file_get_contents("php://input");
     #enviamos los datos al manejador
-    $datosArray = $_Informacion_visual->post($postBody);
+    $datosArray = $_Usuario->post($postBody);
 
     //devolvemos una respuestas
     header('Content-Type: application/json');
@@ -44,11 +52,12 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     echo json_encode($datosArray);
 }
+
 else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
     //recibimos los datos enviados
     $postBody = file_get_contents("php://input");
     //enviamos datos al manejador
-    $datosArray = $_Informacion_visual->put($postBody);
+    $datosArray = $_Usuario->put($postBody);
     //delvovemos una respuesta 
 
     header('Content-Type: application/json');
@@ -60,11 +69,12 @@ else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
     }
     echo json_encode($datosArray);
 } 
+
 else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     //recibimos los datos enviados
     $postBody = file_get_contents("php://input");
     //enviamos datos al manejador
-    $datosArray = $_Informacion_visual->delete($postBody);
+    $datosArray = $_Usuario->delete($postBody);
     //delvovemos una respuesta 
 
     header('Content-Type: application/json');
